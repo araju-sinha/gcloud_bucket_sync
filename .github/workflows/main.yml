@@ -25,7 +25,7 @@ jobs:
         with:
           project_id: 'flash-span-372817'
 
-#       - name: 'Use gcloud CLI'
-#         run: 'gsutil -m rsync -R test/test2.txt gs://<github_action>'
+      - name: 'Use gcloud CLI'
+        run: 'gsutil -m rsync -R folder1/* gs://<github_action>'
 
       
