@@ -11,13 +11,13 @@ jobs:
       # actions/checkout MUST come before auth    
       - uses: 'actions/checkout@v3'
           
-      - name: "store file as secret"  
-        run: |
-         echo "$gcs_SECRET >> gcs_credentials.json"
-         ls -ltr
-         cat gcs_credentials.json
-        env:
-          gcs_SECRET: ${{ secrets.gcp_credentials }}
+#       - name: "store file as secret"  
+#         run: |
+#          echo "$gcs_SECRET >> gcs_credentials.json"
+#          ls -ltr
+#          cat gcs_credentials.json
+#         env:
+#           gcs_SECRET: ${{ secrets.gcp_credentials }}
  
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -34,6 +34,6 @@ jobs:
           project_id: 'flash-span-372817'
 
       - name: 'Use gcloud CLI'
-        run: 'gsutil cp -R -n ./folder1/* gs://github_action/testing'
+        run: 'gsutil cp -R ./folder1/* gs://github_action/testing'
 
       
