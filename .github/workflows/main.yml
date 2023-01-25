@@ -34,6 +34,6 @@ jobs:
           project_id: 'flash-span-372817'
 
       - name: 'Use gcloud CLI'
-        run: 'gsutil cp -R -m ./folder1/* gs://github_action/testing'
+        run: 'gsutil -m cp -R ./folder1/* gs://github_action/testing'
 
       
