@@ -1,0 +1,35 @@
+name: AUTH Template
+# workflow execution
+on:
+  workflow_call:
+#     inputs:
+#       config-path:
+#         required: true
+#         type: string
+#     secrets:
+#       envPAT:
+#         required: true
+
+
+jobs:
+
+  AUTHENTICATE:
+    runs-on: ubuntu-latest
+    steps:
+    - id: 'GCP-Auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: ${{ secrets.gcp_credentials }}
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+      
+    - name: 'GCP SETUP'
+      uses: 'google-github-actions/setup-gcloud@v0.6.0'
+      with:
+        project_id: 'flash-span-372817'
+    
+    - name: "RUN Test command"
+      run: echo Hello, ${{ inputs.username }}
+        
