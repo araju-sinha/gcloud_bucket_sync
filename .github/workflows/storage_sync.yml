@@ -1,0 +1,40 @@
+name: Storage Sync
+on:
+#   push:
+#     branches: [ "master" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout MUST come before auth    
+      - uses: 'actions/checkout@v3'
+      
+      - name: "Call-workflow-AUTH"
+        uses: araju-sinha/gcloud_bucket_sync/.github/workflows/Auth_reusable_wf.yml@master
+#       - name: "store file as secret"  
+#         run: |
+#          echo "$gcs_SECRET >> gcs_credentials.json"
+#          ls -ltr
+#          cat gcs_credentials.json
+#         env:
+#           gcs_SECRET: ${{ secrets.gcp_credentials }}
+ 
+#       - id: 'auth'
+#         name: 'Authenticate to Google Cloud'
+#         uses: 'google-github-actions/auth@v1'
+#         with:
+#           credentials_json: ${{ secrets.gcp_credentials }}
+ 
+#       - name: 'Set up Cloud SDK'
+#         uses: 'google-github-actions/setup-gcloud@v1'
+
+#       - name: 'GCP SETUP'
+#         uses: 'google-github-actions/setup-gcloud@v0.6.0'
+#         with:
+#           project_id: 'flash-span-372817'
+
+      - name: 'Use gcloud CLI'
+        run: 'gsutil rsync -R -c ./folder1 gs://github_action/testing'
+
+      
