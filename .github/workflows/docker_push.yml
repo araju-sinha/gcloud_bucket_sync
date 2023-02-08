@@ -15,6 +15,8 @@ jobs:
   Callworkflowauth:
     needs: checkout_linux_runner 
     uses: araju-sinha/gcloud_bucket_sync/.github/workflows/Auth_reusable_wf.yml@master
+    with:
+        project_id: 'flash-span-372817'
     secrets: inherit
     
   DockerPUSH:
@@ -29,7 +31,7 @@ jobs:
     - name: Create repository using gcloud
       run: |-
        gcloud version
-       gcloud artifacts repositories create demonew --repository-format=docker --location=us-central1 --project={{--async
+       gcloud artifacts repositories create demonew --repository-format=docker --location=us-central1 --async
    
     - name: Build, tag and push image to GAR
       env:
