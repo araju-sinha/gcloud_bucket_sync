@@ -2,6 +2,8 @@ name: AUTH Template
 # workflow execution on call ------------
 on:
   workflow_call:
+    inputs:
+       project_id:
     secrets:
       gcp_credentials:
         required: true
