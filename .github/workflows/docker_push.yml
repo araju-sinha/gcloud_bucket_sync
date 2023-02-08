@@ -19,6 +19,7 @@ jobs:
   Callworkflowauth:
     needs: checkout_linux_runner 
     uses: araju-sinha/gcloud_bucket_sync/.github/workflows/auth_template.yml@master
+    secrets: inherit
     
   Docker:
    runs-on: ubuntu-latest
@@ -27,7 +28,7 @@ jobs:
     - name: Configure Docker Client
       run: |-
          gcloud auth configure-docker --quiet
-          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+         gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
 
     - name: Create repository using gcloud
       run: |-
