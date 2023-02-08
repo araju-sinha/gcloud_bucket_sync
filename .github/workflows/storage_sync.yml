@@ -4,7 +4,15 @@ on:
 #     branches: [ "master" ]
   workflow_dispatch:
 jobs:  
+
+  checkout_linux_runner:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v3 
+  
   CallworkflowAUTH:
+    needs: checkout_linux_runner
     uses: araju-sinha/gcloud_bucket_sync/.github/workflows/Auth_reusable_wf.yml@master
     
   
@@ -12,7 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: CallworkflowAUTH
     steps:
-      - run: 'gsutil rsync -R -c ./folder1 gs://github_action/testing'
+     - name: "yml to json"
+       run: echo "hello"
+     - name: "cloud sync"
+       run: 'gsutil rsync -R -c ./folder1 gs://github_action/testing'
       
 #       - name: "store file as secret"  
 #         run: |
