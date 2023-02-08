@@ -14,7 +14,6 @@ jobs:
   CallworkflowAUTH:
     needs: checkout_linux_runner
     uses: araju-sinha/gcloud_bucket_sync/.github/workflows/Auth_reusable_wf.yml@master
-    
   
   RSYNC:
     runs-on: ubuntu-latest
