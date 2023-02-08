@@ -1,8 +1,10 @@
 name: AUTH Template
-# workflow execution
+# workflow execution on call ------------
 on:
   workflow_call:
-
+    secrets:
+      gcp_credentials:
+        required: true
 
 jobs:
 
