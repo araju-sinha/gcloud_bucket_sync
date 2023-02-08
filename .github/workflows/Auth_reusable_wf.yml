@@ -2,13 +2,6 @@ name: AUTH Template
 # workflow execution
 on:
   workflow_call:
-#     inputs:
-#       config-path:
-#         required: true
-#         type: string
-#     secrets:
-#       envPAT:
-#         required: true
 
 
 jobs:
@@ -33,5 +26,5 @@ jobs:
         project_id: 'flash-span-372817'
     
     - name: "RUN Test command"
-      run: echo Hello, ${{ inputs.username }}
+      run: echo Hello
         
