@@ -14,7 +14,7 @@ jobs:
         
   Callworkflowauth:
     needs: checkout_linux_runner 
-    uses: araju-sinha/gcloud_bucket_sync/.github/workflows/auth_template.yml@master
+    uses: araju-sinha/gcloud_bucket_sync/.github/workflows/Auth_reusable_wf.yml@master
     secrets: inherit
     
   DockerPUSH:
