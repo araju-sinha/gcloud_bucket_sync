@@ -9,9 +9,7 @@ jobs:
   AUTHENTICATE:
     runs-on: ubuntu-latest
     steps:
-    - uses: 'actions/checkout@v3'
-    
-    - id: 'GCP-Auth'
+    - id: Auth
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
