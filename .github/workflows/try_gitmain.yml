@@ -1,0 +1,26 @@
+name: GIT command try
+
+on:
+  workflow_dispatch:
+
+jobs:
+  checkout_linux_runner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: commands testing
+        run: |
+          Get-ChildItem ".\environments" -Filter ${{ github.ref_name }}*.yaml | 
+          ForEach-Object {
+            $_.BaseName -match "_(?<domain>.*)_" > $null
+            # FOR MULTI-DOMAIN REPOS 
+            Copy-Item ".\environments\$($_.BaseName).yaml" -Destination ".\dags\config\edw$($matches['domain'])\$($matches['domain'])_config.yaml"
+            # FOR SINGLE DOMAIN REPOS 
+            # Copy-Item ".\environments\$($_.BaseName).yaml" -Destination ".\dags\config\$($matches['domain'])_config.yaml"
+            Write-Output "domain=$($matches['domain'])" >> $Env:GITHUB_OUTPUT
+            } 
+      # Select any one of the config files to convert to json, doesn't matter which as only common variables will be used
+      - name: Bash commands to convert YAML to JSON
+        run: |
+          yq -r -j environments/${{ github.ref_name }}_${{ steps.setup_envt.outputs.domain }}_config.yaml | tee ${{ github.ref_name }}_${{ steps.setup_envt.outputs.domain }}_config.json
